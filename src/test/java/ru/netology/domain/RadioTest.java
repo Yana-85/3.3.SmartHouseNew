@@ -16,75 +16,14 @@ public class RadioTest {
     @Test
     public void shouldGetAndSet() {
 
-        assertEquals(9, radio.getQuantityRadioStation());
+        assertEquals(10, radio.getMaxRadioStation());
         assertEquals(0, radio.getMinRadioStation());
         assertEquals(100, radio.getMaxSoundVolume());
         assertEquals(0, radio.getMinSoundVolume());
     }
 
     @Test
-    public void switchingToPreviousRadioButtonQuantityRadioStationNine() {
-        Radio radio = new Radio(9);
-        radio.setCurrentRadioStation(9);
-        radio.previousButton();
-        int expected = 8;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void switchingToNextRadioButtonQuantityRadioStationEight() {
-        Radio radio = new Radio(8);
-        radio.setCurrentRadioStation(6);
-        radio.nextButton();
-        int expected = 7;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void switchingToNextRadioStationAboveLimitValue() {
-        Radio radio = new Radio(10);
-        radio.setCurrentRadioStation(9);
-        radio.nextButton();
-        int expected = 0;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void switchingToNextRadioButtonQuantityRadioStationOne() {
-        Radio radio = new Radio(1);
-        radio.setCurrentRadioStation(1);
-        radio.nextButton();
-        int expected = 0;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void switchingToPreviousRadioButtonQuantityRadioStationOne() {
-        Radio radio = new Radio(1);
-        radio.setCurrentRadioStation(1);
-        radio.previousButton();
-        int expected = 0;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void switchingToPreviousRadioStationBelowLimitValue() {
-        Radio radio = new Radio(10);
-        radio.setCurrentRadioStation(0);
-        radio.previousButton();
-        int expected = 9;
-        int actual = radio.getCurrentRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void currentRadioStationInValidRange() {
-
         radio.setCurrentRadioStation(7);
         int expected = 7;
         int actual = radio.getCurrentRadioStation();
@@ -92,8 +31,31 @@ public class RadioTest {
     }
 
     @Test
-    public void increasingCurrentRadioStation() {
+    public void currentRadioStationEqualMaxRadioStation() {
+        radio.setCurrentRadioStation(10);
+        int expected = 10;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
 
+    @Test
+    public void currentRadioStationAboveLimitValue() {
+        radio.setCurrentRadioStation(11);
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void currentRadioStationBelowLimitValue() {
+        radio.setCurrentRadioStation(-1);
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void increasingCurrentRadioStation() {
         radio.setCurrentRadioStation(0);
         radio.nextButton();
         int expected = 1;
@@ -103,7 +65,6 @@ public class RadioTest {
 
     @Test
     public void decreasingCurrentRadioStation() {
-
         radio.setCurrentRadioStation(1);
         radio.previousButton();
         int expected = 0;
@@ -113,7 +74,6 @@ public class RadioTest {
 
     @Test
     public void nextRadioStationButton() {
-
         radio.setCurrentRadioStation(0);
         radio.nextButton();
         int expected = 1;
@@ -123,7 +83,6 @@ public class RadioTest {
 
     @Test
     public void prevRadioStationButton() {
-
         radio.setCurrentRadioStation(6);
         radio.previousButton();
         int expected = 5;
@@ -133,8 +92,7 @@ public class RadioTest {
 
     @Test
     public void nextRadioButtonAboveMaxRadioStation() {
-
-        radio.setCurrentRadioStation(9);
+        radio.setCurrentRadioStation(10);
         radio.nextButton();
         int expected = 0;
         int actual = radio.getCurrentRadioStation();
@@ -143,17 +101,15 @@ public class RadioTest {
 
     @Test
     public void previousRadioButtonBelowMinRadioStation() {
-
         radio.setCurrentRadioStation(-1);
         radio.previousButton();
-        int expected = 9;
+        int expected = 10;
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 
     @Test
     public void currentSoundVolumeAboveLimitValue() {
-
         radio.setCurrentSoundVolume(100);
         radio.plusButton();
         int expected = 100;
@@ -163,7 +119,6 @@ public class RadioTest {
 
     @Test
     public void currentSoundVolumeBelowLimitValue() {
-
         radio.setCurrentSoundVolume(0);
         radio.minusButton();
         int expected = 0;
@@ -173,7 +128,6 @@ public class RadioTest {
 
     @Test
     public void increaseSoundVolume() {
-
         radio.setCurrentSoundVolume(5);
         radio.plusButton();
         int expected = 6;
@@ -183,7 +137,6 @@ public class RadioTest {
 
     @Test
     public void decreaseSoundVolume() {
-
         radio.setCurrentSoundVolume(7);
         radio.minusButton();
         int expected = 6;
@@ -193,7 +146,6 @@ public class RadioTest {
 
     @Test
     public void shouldRadioIsOn() {
-
         radio.isOn();
         assertFalse(radio.isOn());
     }
