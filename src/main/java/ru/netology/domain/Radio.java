@@ -1,14 +1,22 @@
 package ru.netology.domain;
 
 public class Radio {
-    private String name;
+    private String name = "Радио - Маяк";
     private int currentRadioStation;
     private int minRadioStation = 0;
-    private int maxRadioStation = 9;
+    private int quantityRadioStation;
     private int currentSoundVolume;
     private int minSoundVolume = 0;
-    private int maxSoundVolume = 10;
+    private int maxSoundVolume = 100;
     private boolean on;
+
+    public Radio(int quantityRadioStation) {
+        this.quantityRadioStation = quantityRadioStation - 1;
+    }
+
+    public Radio() {
+        this.quantityRadioStation = 9;
+    }
 
     public String getName() {
         return name;
@@ -18,12 +26,12 @@ public class Radio {
         this.name = name;
     }
 
-    public int getMaxRadioStation() {
-        return maxRadioStation;
+    public int getQuantityRadioStation() {
+        return quantityRadioStation;
     }
 
-    public void setMaxRadioStation(int maxRadioStation) {
-        this.maxRadioStation = maxRadioStation;
+    public void setQuantityRadioStation(int quantityRadioStation) {
+        this.quantityRadioStation = quantityRadioStation;
     }
 
     public int getMinRadioStation() {
@@ -39,7 +47,7 @@ public class Radio {
     }
 
     public void setCurrentRadioStation(int currentRadioStation) {
-        if (currentRadioStation > maxRadioStation) {
+        if (currentRadioStation > quantityRadioStation) {
             return;
         }
         if (currentRadioStation < minRadioStation) {
@@ -49,19 +57,19 @@ public class Radio {
     }
 
     public void nextButton() {
-        if (currentRadioStation == maxRadioStation) {
+        if (currentRadioStation >= quantityRadioStation) {
             this.currentRadioStation = minRadioStation;
-            return;
+        } else {
+            this.currentRadioStation++;
         }
-        this.currentRadioStation++;
     }
 
     public void previousButton() {
-        if (currentRadioStation == minRadioStation) {
-            this.currentRadioStation = maxRadioStation;
-            return;
+        if (currentRadioStation <= minRadioStation) {
+            this.currentRadioStation = quantityRadioStation;
+        } else {
+            this.currentRadioStation--;
         }
-        this.currentRadioStation--;
     }
 
     public int getMaxSoundVolume() {
@@ -89,17 +97,15 @@ public class Radio {
     }
 
     public void plusButton() {
-        if (currentSoundVolume == maxSoundVolume) {
-            return;
+        if (currentSoundVolume < maxSoundVolume) {
+            currentSoundVolume++;
         }
-        this.currentSoundVolume++;
     }
 
     public void minusButton() {
-        if (currentSoundVolume == minSoundVolume) {
-            return;
+        if (currentSoundVolume > minSoundVolume) {
+            currentSoundVolume--;
         }
-        this.currentSoundVolume--;
     }
 
     public boolean isOn() {
